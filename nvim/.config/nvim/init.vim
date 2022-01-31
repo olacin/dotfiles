@@ -2,9 +2,6 @@ lua require('options')
 lua require('plugins')
 lua require('mappings')
 
-autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()
-" vim.api.nvim_command('autocmd BufPreWrite *.py :lua vim.lsp.buf.formatting_sync()')
-
 let g:doge_doc_standard_python = 'google'
 
 " inoremap <C-k> <esc>:m .-2<CR>==
@@ -25,13 +22,6 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
-  }
-})
-
--- Setup lualine
-require'lualine'.setup({
-  options = {
-    theme = 'gruvbox_dark'
   }
 })
 EOF
