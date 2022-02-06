@@ -81,7 +81,12 @@ return packer.startup(function(use)
 	})
 
 	-- Docstrings
-	use({ "kkoomen/vim-doge", run = ":call doge#install()" })
+	-- use({ "kkoomen/vim-doge", run = ":call doge#install()" })
+	use({
+		"danymat/neogen",
+		config = require("config/neogen"),
+		requires = "nvim-treesitter/nvim-treesitter",
+	})
 
 	-- Autopairs
 	use({
