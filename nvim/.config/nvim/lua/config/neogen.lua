@@ -1,8 +1,8 @@
 local ok, neogen = pcall(require, "neogen")
 if not ok then
-	return
+    return
 end
 
 neogen.setup({
-	enabled = true,
+    enabled = true,
 })
