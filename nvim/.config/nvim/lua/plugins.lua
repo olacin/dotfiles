@@ -70,8 +70,15 @@ return packer.startup(function(use)
 	use("olacin/telescope-gitmoji.nvim")
 	use("jvgrootveld/telescope-zoxide")
 
-	use("tpope/vim-surround")
+	-- Git
 	use("tpope/vim-fugitive")
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = require("config/gitsigns"),
+	})
 
 	-- Statusline
 	use({
@@ -81,14 +88,18 @@ return packer.startup(function(use)
 	})
 
 	-- Docstrings
-	-- use({ "kkoomen/vim-doge", run = ":call doge#install()" })
 	use({
 		"danymat/neogen",
 		config = require("config/neogen"),
 		requires = "nvim-treesitter/nvim-treesitter",
 	})
 
-	-- Autopairs
+	-- Misc
+	use("tpope/vim-surround")
+	use({
+		"numToStr/Comment.nvim",
+		config = require("config/comment"),
+	})
 	use({
 		"windwp/nvim-autopairs",
 		config = require("config/autopairs"),
@@ -96,11 +107,6 @@ return packer.startup(function(use)
 	use({
 		"windwp/nvim-ts-autotag",
 		config = require("config/autotag"),
-	})
-
-	use({
-		"numToStr/Comment.nvim",
-		config = require("config/comment"),
 	})
 
 	if packer_bootstrap then
