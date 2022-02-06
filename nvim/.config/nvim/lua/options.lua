@@ -8,7 +8,9 @@ o.autoindent = true
 o.tabstop = 4
 o.shiftwidth = 4
 o.showmode = false
-o.completeopt = {"menu", "menuone", "noselect"}
+o.completeopt = { "menu", "menuone", "noselect" }
+o.termguicolors = true
+vim.o.background = "dark"
 
 cmd("colorscheme gruvbox")
 wo.colorcolumn = "88"

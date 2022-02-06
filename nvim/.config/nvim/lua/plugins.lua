@@ -1,23 +1,58 @@
-return require("packer").startup(function()
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+local fn = vim.fn
 
-	-- Theme
-	use("gruvbox-community/gruvbox")
+-- Automaticaly install packer
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+	packer_bootstrap = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
+	print("Installing packer...")
+end
+
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]])
+
+local ok, packer = pcall(require, "packer")
+if not ok then
+	return
+end
+
+return packer.startup(function(use)
+	use("wbthomason/packer.nvim") -- Packer
+	use("ellisonleao/gruvbox.nvim") -- Theme
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- TreeSitter
 
 	-- LSP
 	use({
 		"neovim/nvim-lspconfig",
 		config = require("config/nvim-lspconfig"),
 	})
+	use({ "j-hui/fidget.nvim", config = require("config/fidget") })
 
 	-- Autocompletion
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use({ "hrsh7th/nvim-cmp", config = require("config/nvim-cmp") })
-	use("L3MON4D3/LuaSnip")
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			{ "L3MON4D3/LuaSnip" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "rafamadriz/friendly-snippets" },
+			{ "onsails/lspkind-nvim" },
+		},
+		config = require("config/nvim-cmp"),
+	})
 
 	-- Formatting
 	use({
@@ -35,9 +70,7 @@ return require("packer").startup(function()
 	use("olacin/telescope-gitmoji.nvim")
 	use("jvgrootveld/telescope-zoxide")
 
-	-- Utils
 	use("tpope/vim-surround")
-	use("tpope/vim-commentary")
 	use("tpope/vim-fugitive")
 
 	-- Statusline
@@ -46,9 +79,6 @@ return require("packer").startup(function()
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		config = require("config/lualine"),
 	})
-
-	-- TreeSitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
 	-- Docstrings
 	use({ "kkoomen/vim-doge", run = ":call doge#install()" })
@@ -62,4 +92,13 @@ return require("packer").startup(function()
 		"windwp/nvim-ts-autotag",
 		config = require("config/autotag"),
 	})
+
+	use({
+		"numToStr/Comment.nvim",
+		config = require("config/comment"),
+	})
+
+	if packer_bootstrap then
+		require("packer").sync()
+	end
 end)

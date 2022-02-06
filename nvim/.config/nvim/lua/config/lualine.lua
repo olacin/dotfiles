@@ -1,4 +1,9 @@
-require("lualine").setup({
+local ok, lualine = pcall(require, "lualine")
+if not ok then
+	return
+end
+
+lualine.setup({
 	options = {
 		icons_enabled = true,
 		component_separators = "|",
@@ -11,6 +16,7 @@ require("lualine").setup({
 			{
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
+				symbols = { error = "E", warn = "W", info = "I", hint = "H" },
 			},
 		},
 		lualine_x = { "encoding" },

@@ -1,13 +1,30 @@
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+local signs = { Error = "E ", Warn = "W ", Hint = "H ", Info = "I " }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+local function contains(tbl, val)
+	for _, value in ipairs(tbl) do
+		if value == val then
+			return true
+		end
+	end
+	return false
+end
+
+local servers = { "pyright", "tsserver", "gopls" }
+local disabled_formatters = { "tsserver", "gopls" }
+
 local on_attach = function(client, bufnr)
-	-- Disable formatting for tsserver
-	if client.name == "tsserver" then
+	if contains(disabled_formatters, client.name) then
+		-- Disable formatting
 		client.resolved_capabilities.document_formatting = false
 		client.resolved_capabilities.document_range_formatting = false
 	end
 
-	-- Mappings.
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
 	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = 0 })
@@ -18,9 +35,6 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = 0 })
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "tsserver", "gopls" }
 for _, lsp in pairs(servers) do
 	require("lspconfig")[lsp].setup({
 		capabilities = capabilities,
