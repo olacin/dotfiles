@@ -3,17 +3,38 @@ local function map(mode, lhs, rhs, opts)
     if opts then
         options = vim.tbl_extend("force", options, opts)
     end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, options)
+end
+
+local function with_theme(rhs)
+    local themes = require("telescope.themes")
+
+    return function()
+        return rhs(themes.get_dropdown({}))
+    end
 end
 
 vim.g.mapleader = " "
 
-map("n", "<leader><space>", "<cmd>Telescope buffers<cr>")
-map("n", "<leader>sf", "<cmd>Telescope find_files<cr>")
-map("n", "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
-map("n", "<leader>sh", "<cmd>Telescope help_tags<cr>")
-map("n", "<leader>sd", "<cmd>Telescope grep_string<cr>")
-map("n", "<leader>sp", "<cmd>Telescope live_grep<cr>")
+-- Telescope mappings
+local ok, telescope = pcall(require, "telescope")
+if ok then
+    local builtin = require("telescope.builtin")
+    map("n", "<leader>fb", with_theme(builtin.buffers))
+    map("n", "<leader>ff", with_theme(builtin.find_files))
+    map("n", "<leader>ft", with_theme(builtin.git_files))
+    map("n", "<leader>fg", with_theme(builtin.live_grep))
+    map("n", "<leader>fh", with_theme(builtin.help_tags))
+    map("n", "<leader>gw", with_theme(builtin.grep_string))
+    map("n", "<leader>gb", with_theme(builtin.git_branches))
+    map("n", "<leader>gc", with_theme(telescope.extensions.gitmoji.search))
+end
+
+-- Docstring
+local ok, neogen = pcall(require, "neogen")
+if ok then
+    map("n", "<leader>d", neogen.generate)
+end
 
 map("n", "<leader>Y", 'gg"+yG')
 
@@ -35,12 +56,3 @@ map("v", "J", ":m '>+1<CR>==gv=gv")
 map("v", "K", ":m '<-2<CR>==gv=gv")
 map("n", "<leader>j", "<cmd>m .+1<CR>==")
 map("n", "<leader>k", "<cmd>m .-2<CR>==")
-
--- escape insert mode quicker
-map("i", "jk", "<esc>")
-
--- open gitmoji to commit
-map("n", "<leader>c", "<cmd>Telescope gitmoji search<cr>")
-
--- Generate docstring
-map("n", "<leader>d", ":lua require('neogen').generate()<CR>")

@@ -63,12 +63,14 @@ return packer.startup(function(use)
     -- Telescope
     use({
         "nvim-telescope/telescope.nvim",
-        requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
+        requires = {
+            { "nvim-lua/popup.nvim" },
+            { "nvim-lua/plenary.nvim" },
+            { "olacin/telescope-gitmoji.nvim" },
+        },
         config = require("config/telescope"),
     })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-    use("olacin/telescope-gitmoji.nvim")
-    use("jvgrootveld/telescope-zoxide")
 
     -- Git
     use("tpope/vim-fugitive")
