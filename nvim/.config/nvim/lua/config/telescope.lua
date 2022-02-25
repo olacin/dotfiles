@@ -5,9 +5,7 @@ end
 
 local actions = require("telescope.actions")
 local sorters = require("telescope.sorters")
-
-telescope.load_extension("fzf")
-telescope.load_extension("gitmoji")
+local fb_actions = telescope.extensions.file_browser.actions
 
 telescope.setup({
     defaults = {
@@ -27,4 +25,20 @@ telescope.setup({
         color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
     },
+--    extensions = {
+--        file_browser = {
+--            mappings = {
+--                ["i"] = {
+--                    ["C-n"] = fb_actions.create(),
+--                    ["C-r"] = fb_actions.rename(),
+--                    ["C-d"] = fb_actions.remove(),
+--                    ["C-h"] = fb_actions.toggle_hidden(),
+--                },
+--            },
+--        },
+--    },
 })
+
+telescope.load_extension("fzf")
+telescope.load_extension("file_browser")
+telescope.load_extension("gitmoji")

@@ -36,6 +36,24 @@ if ok then
     map("n", "<leader>d", neogen.generate)
 end
 
+-- Luasnip mappings
+local ok, luasnip = pcall(require, "luasnip")
+if ok then
+    map({ "i", "s" }, "<C-k>", function()
+        if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+        end
+    end)
+    map({ "i", "s" }, "<C-j>", function()
+        if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        end
+    end)
+end
+
+map("i", "jk", "<esc>")
+
+-- yank file into clipboard
 map("n", "<leader>Y", 'gg"+yG')
 
 -- keep centered

@@ -28,15 +28,17 @@ end
 
 return packer.startup(function(use)
     use("wbthomason/packer.nvim") -- Packer
+    use("lewis6991/impatient.nvim") -- Impatient
+    use("dstein64/vim-startuptime") -- StartupTime
     use("ellisonleao/gruvbox.nvim") -- Theme
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- TreeSitter
 
     -- LSP
     use({
         "neovim/nvim-lspconfig",
-        config = require("config/nvim-lspconfig"),
+        config = require("config.nvim-lspconfig"),
     })
-    use({ "j-hui/fidget.nvim", config = require("config/fidget") })
+    use({ "j-hui/fidget.nvim", config = require("config.fidget") })
 
     -- Autocompletion
     use({
@@ -51,13 +53,13 @@ return packer.startup(function(use)
             { "rafamadriz/friendly-snippets" },
             { "onsails/lspkind-nvim" },
         },
-        config = require("config/nvim-cmp"),
+        config = require("config.nvim-cmp"),
     })
 
     -- Formatting
     use({
         "jose-elias-alvarez/null-ls.nvim",
-        config = require("config/null-ls"),
+        config = require("config.null-ls"),
     })
 
     -- Telescope
@@ -66,9 +68,10 @@ return packer.startup(function(use)
         requires = {
             { "nvim-lua/popup.nvim" },
             { "nvim-lua/plenary.nvim" },
+            { "nvim-telescope/telescope-file-browser.nvim" },
             { "olacin/telescope-gitmoji.nvim" },
         },
-        config = require("config/telescope"),
+        config = require("config.telescope"),
     })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
@@ -79,20 +82,20 @@ return packer.startup(function(use)
         requires = {
             "nvim-lua/plenary.nvim",
         },
-        config = require("config/gitsigns"),
+        config = require("config.gitsigns"),
     })
 
     -- Statusline
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
-        config = require("config/lualine"),
+        config = require("config.lualine"),
     })
 
     -- Docstrings
     use({
         "danymat/neogen",
-        config = require("config/neogen"),
+        config = require("config.neogen"),
         requires = "nvim-treesitter/nvim-treesitter",
     })
 
@@ -100,15 +103,15 @@ return packer.startup(function(use)
     use("tpope/vim-surround")
     use({
         "numToStr/Comment.nvim",
-        config = require("config/comment"),
+        config = require("config.comment"),
     })
     use({
         "windwp/nvim-autopairs",
-        config = require("config/autopairs"),
+        config = require("config.autopairs"),
     })
     use({
         "windwp/nvim-ts-autotag",
-        config = require("config/autotag"),
+        config = require("config.autotag"),
     })
 
     if packer_bootstrap then
