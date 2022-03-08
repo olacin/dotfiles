@@ -14,12 +14,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
     print("Installing packer...")
 end
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+local group = vim.api.nvim_create_augroup("packer_user_config", {clear = true})
+vim.api.nvim_create_autocmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile> | PackerSync", group = group })
 
 local ok, packer = pcall(require, "packer")
 if not ok then
