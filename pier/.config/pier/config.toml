@@ -74,3 +74,41 @@ return 0
 alias = "check-ssh-certs"
 description = "Check ssh certificates expiration dates"
 tags = ["network"]
+
+[scripts.blacklist-ip]
+command = '''
+#!/usr/bin/python3
+
+import pymongo
+import sys
+
+client = pymongo.MongoClient("mongodb.footprint")
+col = client.footprint.assets
+
+
+def blacklist(ip):
+    doc = col.find_one_and_update(
+        {"name": ip},
+        update={"$push": {"tags": "blacklisted"}},
+        return_document=pymongo.collection.ReturnDocument.AFTER,
+    )
+    return doc
+
+
+def is_blacklisted(ip):
+    doc = col.find_one({"name": ip}, {"tags": 1})
+    return "blacklisted" in doc.get("tags", [])
+
+
+if __name__ == "__main__":
+    ip = sys.argv[1]
+    if is_blacklisted(ip):
+        print(f"[-] {ip} is already blacklisted")
+        exit(1)
+    else:
+        doc = blacklist(ip)
+        print(f"[+] {ip} has been successfully blacklisted", doc)
+'''
+alias = "blacklist-ip"
+description = "Blacklist an IP in ASM"
+tags = ["asm"]

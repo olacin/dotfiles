@@ -14,8 +14,11 @@ if fn.empty(fn.glob(install_path)) > 0 then
     print("Installing packer...")
 end
 
-local group = vim.api.nvim_create_augroup("packer_user_config", {clear = true})
-vim.api.nvim_create_autocmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile> | PackerSync", group = group })
+local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    { pattern = "plugins.lua", command = "source <afile> | PackerSync", group = group }
+)
 
 local ok, packer = pcall(require, "packer")
 if not ok then
@@ -56,6 +59,17 @@ return packer.startup(function(use)
     use({
         "jose-elias-alvarez/null-ls.nvim",
         config = require("config.null-ls"),
+    })
+
+    -- Debugging
+    use({
+        "mfussenegger/nvim-dap",
+        requires = {
+            { "mfussenegger/nvim-dap-python" },
+            { "leoluz/nvim-dap-go" },
+            { "rcarriga/nvim-dap-ui" },
+        },
+        config = require("config.dap"),
     })
 
     -- Telescope

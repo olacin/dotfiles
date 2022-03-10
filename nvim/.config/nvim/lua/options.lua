@@ -7,6 +7,7 @@ o.relativenumber = true
 o.autoindent = true
 o.tabstop = 4
 o.shiftwidth = 4
+o.expandtab = true
 o.showmode = false
 o.completeopt = { "menu", "menuone", "noselect" }
 o.termguicolors = true

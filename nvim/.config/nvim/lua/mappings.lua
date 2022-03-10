@@ -30,6 +30,19 @@ if ok then
     map("n", "<leader>gc", with_theme(telescope.extensions.gitmoji.search))
 end
 
+-- Debugging mappings
+local ok, dap = pcall(require, "dap")
+if ok then
+    local dap_python = require("dap-python")
+    map("n", "<leader>dc", dap.continue)
+    map("n", "<leader>dk", dap.terminate)
+    map("n", "<leader>do", dap.step_over)
+    map("n", "<leader>di", dap.step_into)
+    map("n", "<leader>du", dap.step_out)
+    map("n", "<leader>b", dap.toggle_breakpoint)
+    map("n", "<leader>dt", dap_python.test_method)
+end
+
 -- Docstring
 local ok, neogen = pcall(require, "neogen")
 if ok then
