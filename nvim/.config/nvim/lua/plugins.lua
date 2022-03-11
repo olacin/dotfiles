@@ -30,14 +30,38 @@ return packer.startup(function(use)
     use("lewis6991/impatient.nvim") -- Impatient
     use("dstein64/vim-startuptime") -- StartupTime
     use("ellisonleao/gruvbox.nvim") -- Theme
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- TreeSitter
+    use("folke/tokyonight.nvim")
+
+    -- Treesitter
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+        requires = {
+            { "nvim-treesitter/nvim-treesitter-textobjects" },
+            { "nvim-treesitter/playground" },
+            { "JoosepAlviste/nvim-ts-context-commentstring" },
+        },
+        config = require("config.treesitter"),
+    })
 
     -- LSP
     use({
         "neovim/nvim-lspconfig",
+        requires = {
+            { "williamboman/nvim-lsp-installer" },
+        },
         config = require("config.nvim-lspconfig"),
     })
     use({ "j-hui/fidget.nvim", config = require("config.fidget") })
+    use({
+        "folke/trouble.nvim",
+        requires = {
+            { "kyazdani42/nvim-web-devicons" },
+            { "folke/todo-comments.nvim" },
+        },
+        config = require("config.trouble"),
+    })
+    use("folke/lsp-colors.nvim")
 
     -- Autocompletion
     use({
@@ -122,6 +146,10 @@ return packer.startup(function(use)
     use({
         "windwp/nvim-ts-autotag",
         config = require("config.autotag"),
+    })
+    use({
+        "lukas-reineke/indent-blankline.nvim",
+        config = require("config.indent"),
     })
 
     if packer_bootstrap then

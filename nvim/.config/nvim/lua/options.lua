@@ -13,5 +13,6 @@ o.completeopt = { "menu", "menuone", "noselect" }
 o.termguicolors = true
 vim.o.background = "dark"
 
-cmd("colorscheme gruvbox")
+-- cmd("colorscheme gruvbox")
+cmd("colorscheme tokyonight")
 wo.colorcolumn = "88"

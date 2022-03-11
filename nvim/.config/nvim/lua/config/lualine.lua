@@ -8,10 +8,11 @@ lualine.setup({
         icons_enabled = true,
         component_separators = "|",
         section_separators = "",
-        theme = "gruvbox_dark",
+        -- theme = "gruvbox_dark",
+        theme = "tokyonight",
     },
     sections = {
-        lualine_b = { "branch" },
+        lualine_b = { "branch", "filename" },
         lualine_c = {
             {
                 "diagnostics",
