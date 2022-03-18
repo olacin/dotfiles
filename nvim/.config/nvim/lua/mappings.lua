@@ -27,7 +27,7 @@ if ok then
     map("n", "<leader>fh", with_theme(builtin.help_tags))
     map("n", "<leader>gw", with_theme(builtin.grep_string))
     map("n", "<leader>gb", with_theme(builtin.git_branches))
-    map("n", "<leader>gc", with_theme(telescope.extensions.gitmoji.search))
+    map("n", "<leader>gc", with_theme(telescope.extensions.gitmoji.gitmoji))
 end
 
 -- Debugging mappings

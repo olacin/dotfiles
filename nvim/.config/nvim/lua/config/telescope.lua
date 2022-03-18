@@ -25,18 +25,18 @@ telescope.setup({
         color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
     },
-    --    extensions = {
-    --        file_browser = {
-    --            mappings = {
-    --                ["i"] = {
-    --                    ["C-n"] = fb_actions.create(),
-    --                    ["C-r"] = fb_actions.rename(),
-    --                    ["C-d"] = fb_actions.remove(),
-    --                    ["C-h"] = fb_actions.toggle_hidden(),
-    --                },
-    --            },
-    --        },
-    --    },
+    extensions = {
+        gitmoji = {
+            action = function(entry)
+                vim.ui.input({ prompt = "Enter commit msg: " .. entry.value .. " " }, function(msg)
+                    if not msg then
+                        return
+                    end
+                    vim.cmd(':G commit -m "' .. entry.value .. " " .. msg .. '"')
+                end)
+            end,
+        },
+    },
 })
 
 telescope.load_extension("fzf")

@@ -103,6 +103,7 @@ return packer.startup(function(use)
             { "nvim-lua/popup.nvim" },
             { "nvim-lua/plenary.nvim" },
             { "nvim-telescope/telescope-file-browser.nvim" },
+            { "nvim-telescope/telescope-symbols.nvim" },
             { "olacin/telescope-gitmoji.nvim" },
         },
         config = require("config.telescope"),
@@ -151,6 +152,7 @@ return packer.startup(function(use)
         "lukas-reineke/indent-blankline.nvim",
         config = require("config.indent"),
     })
+    use({ "stevearc/dressing.nvim", config = require("config.dressing") })
 
     if packer_bootstrap then
         require("packer").sync()
