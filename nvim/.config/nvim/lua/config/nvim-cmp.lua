@@ -24,8 +24,8 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete(),
     },
     sources = cmp.config.sources({
-        { name = "luasnip" },
         { name = "nvim_lsp" },
+        { name = "luasnip" },
         { name = "nvim_lua" },
         { name = "path" },
         { name = "buffer" },
@@ -54,3 +54,33 @@ luasnip.config.set_config({
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
+
+local s = luasnip.s
+local i = luasnip.insert_node
+local f = luasnip.function_node
+local fmt = require("luasnip.extras.fmt").fmt
+
+local same = function(index)
+    return f(function(arg)
+        return arg[1]
+    end, { index })
+end
+
+luasnip.snippets = {
+    python = {
+        s(
+            "test",
+            fmt(
+                [[
+        @pytest.mark.parametrize(
+            "{}",
+            []
+        )
+        def test_{}({}):
+            pass
+        ]],
+                { i(1), i(2), same(1) }
+            )
+        ),
+    },
+}

@@ -28,7 +28,7 @@ telescope.setup({
     extensions = {
         gitmoji = {
             action = function(entry)
-                vim.ui.input({ prompt = "Enter commit msg: " .. entry.value .. " " }, function(msg)
+                vim.ui.input({ prompt = "Enter commit message: " .. entry.value .. " " }, function(msg)
                     if not msg then
                         return
                     end
