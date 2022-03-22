@@ -3,7 +3,7 @@ local fn = vim.fn
 -- Automaticaly install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({
+    Packer_bootstrap = fn.system({
         "git",
         "clone",
         "--depth",
@@ -25,6 +25,14 @@ if not ok then
     return
 end
 
+packer.init({
+    display = {
+        open_fn = function()
+            return require("packer.util").float({ border = "rounded" })
+        end,
+    },
+})
+
 return packer.startup(function(use)
     use("wbthomason/packer.nvim") -- Packer
     use("lewis6991/impatient.nvim") -- Impatient
@@ -41,7 +49,6 @@ return packer.startup(function(use)
             { "nvim-treesitter/playground" },
             { "JoosepAlviste/nvim-ts-context-commentstring" },
         },
-        config = require("config.treesitter"),
     })
 
     -- LSP
@@ -50,16 +57,14 @@ return packer.startup(function(use)
         requires = {
             { "williamboman/nvim-lsp-installer" },
         },
-        config = require("config.nvim-lspconfig"),
     })
-    use({ "j-hui/fidget.nvim", config = require("config.fidget") })
+    use({ "j-hui/fidget.nvim" })
     use({
         "folke/trouble.nvim",
         requires = {
             { "kyazdani42/nvim-web-devicons" },
             { "folke/todo-comments.nvim" },
         },
-        config = require("config.trouble"),
     })
     use("folke/lsp-colors.nvim")
 
@@ -76,13 +81,11 @@ return packer.startup(function(use)
             { "rafamadriz/friendly-snippets" },
             { "onsails/lspkind-nvim" },
         },
-        config = require("config.nvim-cmp"),
     })
 
     -- Formatting
     use({
         "jose-elias-alvarez/null-ls.nvim",
-        config = require("config.null-ls"),
     })
 
     -- Debugging
@@ -93,7 +96,6 @@ return packer.startup(function(use)
             { "leoluz/nvim-dap-go" },
             { "rcarriga/nvim-dap-ui" },
         },
-        config = require("config.dap"),
     })
 
     -- Telescope
@@ -106,7 +108,6 @@ return packer.startup(function(use)
             { "nvim-telescope/telescope-symbols.nvim" },
             { "olacin/telescope-gitmoji.nvim" },
         },
-        config = require("config.telescope"),
     })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
@@ -117,20 +118,17 @@ return packer.startup(function(use)
         requires = {
             "nvim-lua/plenary.nvim",
         },
-        config = require("config.gitsigns"),
     })
 
     -- Statusline
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
-        config = require("config.lualine"),
     })
 
     -- Docstrings
     use({
         "danymat/neogen",
-        config = require("config.neogen"),
         requires = "nvim-treesitter/nvim-treesitter",
     })
 
@@ -138,23 +136,19 @@ return packer.startup(function(use)
     use("tpope/vim-surround")
     use({
         "numToStr/Comment.nvim",
-        config = require("config.comment"),
     })
     use({
         "windwp/nvim-autopairs",
-        config = require("config.autopairs"),
     })
     use({
         "windwp/nvim-ts-autotag",
-        config = require("config.autotag"),
     })
     use({
         "lukas-reineke/indent-blankline.nvim",
-        config = require("config.indent"),
     })
-    use({ "stevearc/dressing.nvim", config = require("config.dressing") })
+    use({ "stevearc/dressing.nvim" })
 
-    if packer_bootstrap then
+    if Packer_bootstrap then
         require("packer").sync()
     end
 end)

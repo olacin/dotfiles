@@ -12,12 +12,30 @@ null_ls.setup({
     sources = {
         -- Python
         diagnostics.flake8.with({ extra_args = { "--max-line-length", "88" } }),
-        formatting.black,
-        formatting.isort,
+        formatting.black.with({ extra_args = { "--fast" } }),
+        formatting.isort.with({ extra_args = { "--profile", "black" } }),
         -- Typescript
         diagnostics.eslint_d,
         code_actions.eslint_d,
-        formatting.prettier,
+        formatting.prettier.with({
+            filetypes = {
+                "javascript",
+                "javascriptreact",
+                "typescript",
+                "typescriptreact",
+                "vue",
+                "css",
+                "scss",
+                "less",
+                "html",
+                "json",
+                "jsonc",
+                -- "markdown",
+                "yaml",
+                "graphql",
+                "handlebars",
+            },
+        }),
         -- Lua
         formatting.stylua,
         -- Go

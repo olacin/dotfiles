@@ -3,7 +3,7 @@ if not ok then
     return
 end
 
-require("dressing").setup({
+dressing.setup({
     input = {
         enabled = true,
 

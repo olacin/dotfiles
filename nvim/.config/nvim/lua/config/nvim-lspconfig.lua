@@ -1,4 +1,14 @@
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local cmp_ok, cmp = pcall(require, "cmp_nvim_lsp")
+if not cmp_ok then
+    return
+end
+
+local ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+if not ok then
+    return
+end
+
+local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local signs = { Error = "E ", Warn = "W ", Hint = "H ", Info = "I " }
 for type, icon in pairs(signs) do
@@ -15,7 +25,6 @@ local function contains(tbl, val)
     return false
 end
 
-local servers = { "pyright", "tsserver", "gopls" }
 local disabled_formatters = { "tsserver", "gopls" }
 
 local on_attach = function(client, bufnr)
@@ -25,19 +34,31 @@ local on_attach = function(client, bufnr)
         client.resolved_capabilities.document_range_formatting = false
     end
 
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = 0 })
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = 0 })
-    vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, { buffer = 0 })
-    vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, { buffer = 0 })
-    vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", { buffer = 0 })
-    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = 0 })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr })
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = bufnr })
 end
 
-for _, lsp in pairs(servers) do
-    require("lspconfig")[lsp].setup({
+lsp_installer.on_server_ready(function(server)
+    local opts = {
         capabilities = capabilities,
         on_attach = on_attach,
-    })
-end
+    }
+
+    if server.name == "sumneko_lua" then
+        opts.settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { "vim", "awesome", "client", "screen", "root" },
+                },
+            },
+        }
+    end
+
+    server:setup(opts)
+end)
