@@ -107,6 +107,7 @@ return packer.startup(function(use)
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "nvim-telescope/telescope-symbols.nvim" },
             { "olacin/telescope-gitmoji.nvim" },
+            { "olacin/telescope-cc.nvim" },
         },
     })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })

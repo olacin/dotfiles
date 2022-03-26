@@ -25,20 +25,9 @@ telescope.setup({
         color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
     },
-    extensions = {
-        gitmoji = {
-            action = function(entry)
-                vim.ui.input({ prompt = "Enter commit message: " .. entry.value .. " " }, function(msg)
-                    if not msg then
-                        return
-                    end
-                    vim.cmd(':G commit -m "' .. entry.value .. " " .. msg .. '"')
-                end)
-            end,
-        },
-    },
 })
 
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 telescope.load_extension("gitmoji")
+telescope.load_extension("conventional_commits")
