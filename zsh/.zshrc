@@ -30,6 +30,7 @@ export PATH=$PATH:/home/npr/.local/bin
 export PATH=$PATH:/home/npr/go/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.pyenv/bin
+export PATH=$PATH:$HOME/.local/share/nvim/lsp_servers/rust
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
