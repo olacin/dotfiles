@@ -1,2 +1,20 @@
+add_newline = false
+
+[directory]
+style = "bold #7dcfff"
+
+[git_branch]
+style = "bold #e0af68"
+
+[hostname]
+ssh_only = false
+style = "bold #7aa2f7"
+
 [python]
 pyenv_version_name = true
+
+[username]
+style_root = "bold #f7768e"
+style_user = "bold #7aa2f7"
+format = "[$user]($style)[@]($style)"
+show_always = true
