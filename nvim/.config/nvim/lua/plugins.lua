@@ -37,7 +37,9 @@ return packer.startup(function(use)
     use("wbthomason/packer.nvim") -- Packer
     use("lewis6991/impatient.nvim") -- Impatient
     use("dstein64/vim-startuptime") -- StartupTime
-    use("ellisonleao/gruvbox.nvim") -- Theme
+
+    -- Themes
+    -- use("ellisonleao/gruvbox.nvim")
     use("folke/tokyonight.nvim")
 
     -- Treesitter
@@ -81,6 +83,11 @@ return packer.startup(function(use)
             { "rafamadriz/friendly-snippets" },
             { "onsails/lspkind-nvim" },
         },
+    })
+    use({
+        "tzachar/cmp-tabnine",
+        run = "./install.sh",
+        requires = "hrsh7th/nvim-cmp",
     })
 
     -- Formatting
@@ -135,19 +142,18 @@ return packer.startup(function(use)
 
     -- Misc
     use("tpope/vim-surround")
+    use("ThePrimeagen/harpoon")
+    use("numToStr/Comment.nvim")
+    use("windwp/nvim-autopairs")
+    use("windwp/nvim-ts-autotag")
+    use("lukas-reineke/indent-blankline.nvim")
+    use("stevearc/dressing.nvim")
     use({
-        "numToStr/Comment.nvim",
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup()
+        end,
     })
-    use({
-        "windwp/nvim-autopairs",
-    })
-    use({
-        "windwp/nvim-ts-autotag",
-    })
-    use({
-        "lukas-reineke/indent-blankline.nvim",
-    })
-    use({ "stevearc/dressing.nvim" })
 
     if Packer_bootstrap then
         require("packer").sync()

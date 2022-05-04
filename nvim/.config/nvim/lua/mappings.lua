@@ -27,7 +27,7 @@ if ok then
     map("n", "<leader>fh", with_theme(builtin.help_tags))
     map("n", "<leader>gw", with_theme(builtin.grep_string))
     map("n", "<leader>gb", with_theme(builtin.git_branches))
-    map("n", "<leader>gc", with_theme(telescope.extensions.gitmoji.gitmoji))
+    map("n", "<leader>gc", with_theme(telescope.extensions.conventional_commits.conventional_commits))
 end
 
 -- Debugging mappings
@@ -64,6 +64,11 @@ if ok then
     end)
 end
 
+local ok, harpoon = pcall(require, "harpoon.mark")
+if ok then
+    map("n", "<leader>h", harpoon.add_file)
+end
+
 map("i", "jk", "<esc>")
 
 -- yank file into clipboard
@@ -85,5 +90,7 @@ map("i", ":", ":<c-g>u")
 -- move text
 map("v", "J", ":m '>+1<CR>==gv=gv")
 map("v", "K", ":m '<-2<CR>==gv=gv")
-map("n", "<leader>j", "<cmd>m .+1<CR>==")
-map("n", "<leader>k", "<cmd>m .-2<CR>==")
+
+-- TODO: convert these mappings in Lua
+vim.cmd("nnoremap <leader>j :m .+1<CR>==")
+vim.cmd("nnoremap <leader>k :m .-2<CR>==")

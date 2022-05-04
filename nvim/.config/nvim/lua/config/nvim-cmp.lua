@@ -26,6 +26,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "cmp_tabnine" },
         { name = "nvim_lua" },
         { name = "path" },
         { name = "buffer" },
@@ -39,6 +40,7 @@ cmp.setup({
                 nvim_lua = "[api]",
                 path = "[path]",
                 luasnip = "[snip]",
+                cmp_tabnine = "[tab9]",
             },
         }),
     },

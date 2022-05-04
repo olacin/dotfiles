@@ -5,7 +5,6 @@ end
 
 local actions = require("telescope.actions")
 local sorters = require("telescope.sorters")
-local fb_actions = telescope.extensions.file_browser.actions
 
 telescope.setup({
     defaults = {
@@ -28,6 +27,7 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("harpoon")
 telescope.load_extension("file_browser")
 telescope.load_extension("gitmoji")
 telescope.load_extension("conventional_commits")
