@@ -30,8 +30,8 @@ local disabled_formatters = { "tsserver", "gopls" }
 local on_attach = function(client, bufnr)
     if contains(disabled_formatters, client.name) then
         -- Disable formatting
-        client.server_capabilities.document_formatting = false
-        client.server_capabilities.document_range_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
     end
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
