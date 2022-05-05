@@ -41,10 +41,13 @@ null_ls.setup({
         -- Go
         formatting.gofmt,
     },
-    on_attach = function(client)
-        if client.server_capabilities.document_formatting then
+    on_attach = function(client, bufnr)
+        if client.server_capabilities.documentFormattingProvider then
             local group = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-            vim.api.nvim_create_autocmd("BufWritePre", { command = "lua vim.lsp.buf.formatting_sync()", group = group })
+            vim.api.nvim_create_autocmd(
+                "BufWritePre",
+                { buffer = bufnr, callback = vim.lsp.buf.formatting_sync, group = group }
+            )
         end
     end,
 })
