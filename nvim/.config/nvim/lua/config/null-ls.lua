@@ -41,13 +41,21 @@ null_ls.setup({
         -- Go
         formatting.gofmt,
     },
-    on_attach = function(client, bufnr)
+    on_attach = function(client)
         if client.server_capabilities.documentFormattingProvider then
             local group = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-            vim.api.nvim_create_autocmd(
-                "BufWritePre",
-                { buffer = bufnr, callback = vim.lsp.buf.formatting_sync, group = group }
-            )
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                callback = function()
+                    vim.lsp.buf.format({
+                        filter = function(clients)
+                            return vim.tbl_filter(function(c)
+                                return c.name ~= "tsserver" and c.name ~= "gopls"
+                            end, clients)
+                        end,
+                    })
+                end,
+                group = group,
+            })
         end
     end,
 })
