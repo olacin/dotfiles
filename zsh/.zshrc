@@ -25,9 +25,9 @@ antigen apply
 
 eval "$(starship init zsh)"
 
-# If you come from bash you might have to change your $PATH.
-export PATH=$PATH:/home/npr/.local/bin
-export PATH=$PATH:/home/npr/go/bin
+# Path
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.pyenv/bin
 export PATH=$PATH:$HOME/.local/share/nvim/lsp_servers/rust
