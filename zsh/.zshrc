@@ -26,25 +26,26 @@ antigen apply
 eval "$(starship init zsh)"
 
 # Path
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/.pyenv/bin
-export PATH=$PATH:$HOME/.local/share/nvim/lsp_servers/rust
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/.local/share/nvim/lsp_servers/rust"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 HYPHEN_INSENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 
-# Python
-export PYTHONDONTWRITEBYTECODE=1
-export PIPENV_VENV_IN_PROJECT=1
-eval "$(pyenv virtualenv-init -)"
-
 # Node
 export PATH="$PATH:${HOME}/.npm-packages/bin"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# Python
+export PYTHONDONTWRITEBYTECODE=1
+export PIPENV_VENV_IN_PROJECT=1
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 eval "$(zoxide init zsh)"
 
