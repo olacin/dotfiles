@@ -40,6 +40,11 @@ DISABLE_UPDATE_PROMPT="true"
 export PATH="$PATH:${HOME}/.npm-packages/bin"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# React Native
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
 # Python
 export PYTHONDONTWRITEBYTECODE=1
 export PIPENV_VENV_IN_PROJECT=1
