@@ -12,23 +12,21 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end,
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-e>"] = cmp.mapping.close(),
-        ["<CR>"] = cmp.mapping.confirm({
-            select = true,
-        }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
         ["<C-Space>"] = cmp.mapping.complete(),
-    },
+    }),
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "path" },
         { name = "cmp_tabnine" },
         { name = "nvim_lua" },
-        { name = "path" },
         { name = "buffer" },
     }),
     formatting = {
@@ -57,32 +55,28 @@ luasnip.config.set_config({
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
-local s = luasnip.s
+local s = luasnip.snippet
 local i = luasnip.insert_node
 local f = luasnip.function_node
 local fmt = require("luasnip.extras.fmt").fmt
 
-local same = function(index)
-    return f(function(arg)
-        return arg[1]
-    end, { index })
+local copy = function(args)
+    return args[1]
 end
 
-luasnip.snippets = {
-    python = {
-        s(
-            "test",
-            fmt(
-                [[
+luasnip.add_snippets("python", {
+    s(
+        "test",
+        fmt(
+            [[
         @pytest.mark.parametrize(
             "{}",
             []
         )
         def test_{}({}):
             pass
-        ]],
-                { i(1), i(2), same(1) }
-            )
-        ),
-    },
-}
+        ]]   ,
+            { i(1), i(2), f(copy, 1) }
+        )
+    ),
+})

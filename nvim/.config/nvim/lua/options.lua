@@ -11,6 +11,7 @@ o.expandtab = true
 o.showmode = false
 o.completeopt = { "menu", "menuone", "noselect" }
 o.termguicolors = true
+o.winbar = "%=%m %f"
 vim.o.background = "dark"
 
 -- cmd("colorscheme gruvbox")
