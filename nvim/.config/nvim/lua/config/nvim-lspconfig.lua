@@ -16,19 +16,10 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-local function contains(tbl, val)
-    for _, value in ipairs(tbl) do
-        if value == val then
-            return true
-        end
-    end
-    return false
-end
-
 local disabled_formatters = { "tsserver", "gopls" }
 
 local on_attach = function(client, bufnr)
-    if contains(disabled_formatters, client.name) then
+    if vim.tbl_contains(disabled_formatters, client.name) then
         -- Disable formatting
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
@@ -54,7 +45,7 @@ lsp_installer.on_server_ready(function(server)
         opts.settings = {
             Lua = {
                 diagnostics = {
-                    globals = { "vim", "awesome", "client", "screen", "root" },
+                    globals = { "vim" },
                 },
             },
         }

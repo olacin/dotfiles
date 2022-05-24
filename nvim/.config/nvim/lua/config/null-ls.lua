@@ -12,8 +12,19 @@ null_ls.setup({
     sources = {
         -- Python
         diagnostics.flake8.with({ extra_args = { "--max-line-length", "88" } }),
-        formatting.black.with({ extra_args = { "--fast" } }),
-        formatting.isort.with({ extra_args = { "--profile", "black" } }),
+        formatting.black,
+        formatting.isort.with({
+            extra_args = {
+                "--profile",
+                "black",
+                "--order-by-type",
+                "--multi-line",
+                "3",
+                "--trailing-comma",
+                "--use-parentheses",
+            },
+            prefer_local = ".venv/bin",
+        }),
         -- Typescript
         diagnostics.eslint_d,
         code_actions.eslint_d,
@@ -49,7 +60,7 @@ null_ls.setup({
                     vim.lsp.buf.format({
                         filter = function(clients)
                             return vim.tbl_filter(function(c)
-                                return c.name ~= "tsserver" and c.name ~= "gopls"
+                                return not vim.tbl_contains({ "tsserver", "gopls" }, c.name)
                             end, clients)
                         end,
                     })
