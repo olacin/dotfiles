@@ -8,7 +8,7 @@ local dap_python = require("dap-python")
 local dap_go = require("dap-go")
 
 dapui.setup({
-    sidebar = {
+    layouts = {
         elements = {
             { id = "scopes", size = 0.5 },
             { id = "breakpoints", size = 0.25 },

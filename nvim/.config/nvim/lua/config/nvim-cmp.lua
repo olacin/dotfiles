@@ -80,3 +80,17 @@ luasnip.add_snippets("python", {
         )
     ),
 })
+
+luasnip.add_snippets("go", {
+    s(
+        "iferr",
+        fmt(
+            [[
+        if err != nil {{
+            {}
+        }}
+        ]]   ,
+            { i(1) }
+        )
+    ),
+})
