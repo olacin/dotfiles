@@ -36,6 +36,9 @@ export PATH="$PATH:$HOME/.local/share/nvim/lsp_servers/rust"
 HYPHEN_INSENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 
+# Golang
+export GO111MODULE=on
+
 # Node
 export PATH="$PATH:${HOME}/.npm-packages/bin"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
