@@ -71,6 +71,9 @@ end
 
 map("i", "jk", "<esc>")
 
+-- Git
+map("n", "<leader>gp", ":G push")
+
 -- yank file into clipboard
 map("n", "<leader>Y", 'gg"+yG')
 
