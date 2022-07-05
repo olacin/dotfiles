@@ -58,6 +58,9 @@ return packer.startup(function(use)
         "neovim/nvim-lspconfig",
         requires = {
             { "williamboman/nvim-lsp-installer" },
+            { "ray-x/lsp_signature.nvim" },
+            { "RRethy/vim-illuminate" },
+            { "folke/lua-dev.nvim" },
         },
     })
     use({ "j-hui/fidget.nvim" })
@@ -121,6 +124,8 @@ return packer.startup(function(use)
 
     -- Git
     use("tpope/vim-fugitive")
+    use("TimUntersberger/neogit")
+    use("sindrets/diffview.nvim")
     use({
         "lewis6991/gitsigns.nvim",
         requires = {
