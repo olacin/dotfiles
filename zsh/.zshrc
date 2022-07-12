@@ -31,6 +31,14 @@ export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.local/share/nvim/lsp_servers/rust"
 
+# Vim mode
+bindkey -v
+# Switch to command mode with jk
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M vicmd "v" edit-command-line
+# Incremental search in insert mode
+bindkey "^R" history-incremental-search-backward
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 HYPHEN_INSENSITIVE="true"
