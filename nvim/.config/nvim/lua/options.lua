@@ -12,7 +12,8 @@ o.showmode = false
 o.completeopt = { "menu", "menuone", "noselect" }
 o.termguicolors = true
 o.winbar = "%=%m %f"
-vim.o.background = "dark"
+o.background = "dark"
+o.mouse = nil
 
 -- cmd("colorscheme gruvbox")
 cmd("colorscheme tokyonight")
