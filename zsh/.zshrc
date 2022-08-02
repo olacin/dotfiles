@@ -9,7 +9,11 @@ export SAVEHIST=$HISTSIZE
 export HISTFILE=$HOME/.zsh_history
 
 # Plugins
-source "$HOME/antigen/antigen.zsh"
+ANTIGEN="$HOME/antigen/antigen.zsh"
+if [[ ! -f "$ANTIGEN" ]]; then
+    curl -L git.io/antigen > $ANTIGEN
+fi
+source $ANTIGEN
 
 antigen use oh-my-zsh
 
