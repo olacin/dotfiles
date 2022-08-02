@@ -11,7 +11,10 @@ export HISTFILE=$HOME/.zsh_history
 # Plugins
 ANTIGEN="$HOME/antigen/antigen.zsh"
 if [[ ! -f "$ANTIGEN" ]]; then
-    curl -L git.io/antigen > $ANTIGEN
+    echo "Downloading antigen..."
+    mkdir -p "$HOME/antigen"
+    touch $ANTIGEN
+    curl -s -L git.io/antigen -o $ANTIGEN
 fi
 source $ANTIGEN
 
