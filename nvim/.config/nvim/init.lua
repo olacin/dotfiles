@@ -1,4 +1,5 @@
 require("plugins")
+require("config.theme")
 require("options")
 require("mappings")
 

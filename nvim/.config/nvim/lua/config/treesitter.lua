@@ -1,10 +1,24 @@
-local ok, treesitter_configs = pcall(require, "treesitter.configs")
+local ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
 if not ok then
     return
 end
 
 treesitter_configs.setup({
-    ensure_installed = {},
+    ensure_installed = {
+        "python",
+        "go",
+        "rust",
+        "html",
+        "javascript",
+        "json",
+        "markdown",
+        "rust",
+        "toml",
+        "tsx",
+        "typescript",
+        "lua",
+    },
+    auto_install = true,
     sync_install = false,
     highlight = {
         enable = true,

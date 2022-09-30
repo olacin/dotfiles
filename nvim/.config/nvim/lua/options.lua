@@ -12,7 +12,6 @@ o.showmode = false
 o.completeopt = { "menu", "menuone", "noselect" }
 o.termguicolors = true
 o.winbar = "%=%m %f"
-o.background = "dark"
 o.mouse = nil
 
 -- cmd("colorscheme gruvbox")

@@ -50,6 +50,7 @@ return packer.startup(function(use)
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "nvim-treesitter/playground" },
             { "JoosepAlviste/nvim-ts-context-commentstring" },
+            { "nvim-treesitter/nvim-treesitter-context" },
         },
     })
 
