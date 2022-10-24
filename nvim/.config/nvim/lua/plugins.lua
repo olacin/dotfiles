@@ -37,6 +37,7 @@ return packer.startup(function(use)
     use("wbthomason/packer.nvim") -- Packer
     use("lewis6991/impatient.nvim") -- Impatient
     use("dstein64/vim-startuptime") -- StartupTime
+    use("miversen33/import.nvim") -- Safe imports
 
     -- Themes
     -- use("ellisonleao/gruvbox.nvim")
@@ -58,10 +59,11 @@ return packer.startup(function(use)
     use({
         "neovim/nvim-lspconfig",
         requires = {
-            { "williamboman/nvim-lsp-installer" },
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
             { "ray-x/lsp_signature.nvim" },
             { "RRethy/vim-illuminate" },
-            { "folke/lua-dev.nvim" },
+            { "folke/neodev.nvim" },
         },
     })
     use({ "j-hui/fidget.nvim" })

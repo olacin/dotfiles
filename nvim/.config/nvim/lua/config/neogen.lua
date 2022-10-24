@@ -1,8 +1,5 @@
-local ok, neogen = pcall(require, "neogen")
-if not ok then
-    return
-end
-
-neogen.setup({
-    enabled = true,
-})
+import("neogen", function(neogen)
+    neogen.setup({
+        enabled = true,
+    })
+end)

@@ -1,10 +1,4 @@
-local ok, trouble = pcall(require, "trouble")
-if not ok then
-    return
-end
-
-trouble.setup()
-
-local todos = require("todo-comments")
-
-todos.setup()
+import({ "trouble", "todo-comments" }, function(modules)
+    modules.trouble.setup()
+    modules["todo-comments"].setup()
+end)

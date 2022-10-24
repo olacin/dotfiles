@@ -1,6 +1,3 @@
-local ok, diffview = pcall(require, "diffview")
-if not ok then
-    return
-end
-
-diffview.setup({})
+import("diffview", function(diffview)
+    diffview.setup({})
+end)
