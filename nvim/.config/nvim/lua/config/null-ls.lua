@@ -47,6 +47,13 @@ import("null-ls", function(null_ls)
             formatting.stylua,
             -- Go
             formatting.gofmt,
+            -- Rust
+            formatting.rustfmt.with({
+                extra_args = {
+                    "--edition",
+                    "2021",
+                },
+            }),
         },
         on_attach = function(client)
             if client.server_capabilities.documentFormattingProvider then
