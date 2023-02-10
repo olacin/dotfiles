@@ -1,19 +1,32 @@
-local o = vim.opt
-local wo = vim.wo
-local cmd = vim.cmd
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-o.number = true
-o.relativenumber = true
-o.autoindent = true
-o.tabstop = 4
-o.shiftwidth = 4
-o.expandtab = true
-o.showmode = false
-o.completeopt = { "menu", "menuone", "noselect" }
-o.termguicolors = true
-o.winbar = "%=%m %f"
-o.mouse = nil
+-- o.autoindent = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.colorcolumn = "88"
+vim.opt.scrolloff = 8
+vim.opt.updatetime = 50
+
+vim.opt.showmode = false
+vim.opt.winbar = "%=%m %f"
+vim.opt.mouse = nil
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- cmd("colorscheme gruvbox")
-cmd("colorscheme tokyonight")
-wo.colorcolumn = "88"
+vim.cmd("colorscheme tokyonight")

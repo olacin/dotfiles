@@ -30,15 +30,25 @@ import({ "lspconfig", "cmp_nvim_lsp", "mason", "mason-lspconfig", "lsp_signature
             modules.illuminate.on_attach(client)
         end
 
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
-        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr })
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
-        vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, { buffer = bufnr })
-        vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, { buffer = bufnr })
-        vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", { buffer = bufnr })
-        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = bufnr })
+        local opts = { buffer = bufnr }
+
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+        vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+        vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", opts)
+        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
     end
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "rounded",
+    })
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = "rounded",
+    })
 
     -- Setup mason.nvim
     modules.mason.setup()
@@ -59,4 +69,8 @@ import({ "lspconfig", "cmp_nvim_lsp", "mason", "mason-lspconfig", "lsp_signature
             on_attach = on_attach,
         })
     end
+
+    vim.diagnostic.config({
+        virtual_text = true,
+    })
 end)
