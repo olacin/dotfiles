@@ -37,6 +37,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.local/share/nvim/lsp_servers/rust"
+export PATH=$PATH:./node_modules/.bin
 
 # Vim mode
 bindkey -v
@@ -80,3 +81,5 @@ sources=(
 for s in "${sources[@]}"; do
   source $HOME/.config/zsh/include/${s}.zsh
 done
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
