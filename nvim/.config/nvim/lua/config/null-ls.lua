@@ -7,7 +7,8 @@ import("null-ls", function(null_ls)
         -- debug = true,
         sources = {
             -- Python
-            diagnostics.flake8.with({ extra_args = { "--max-line-length", "88" } }),
+            diagnostics.ruff,
+            -- diagnostics.flake8.with({ extra_args = { "--max-line-length", "88" } }),
             formatting.black,
             formatting.isort.with({
                 extra_args = {
