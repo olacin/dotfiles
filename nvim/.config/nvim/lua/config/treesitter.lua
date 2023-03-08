@@ -14,6 +14,10 @@ tsc.setup({
         "tsx",
         "typescript",
         "lua",
+        "diff",
+        "gitignore",
+        "regex",
+        "yaml",
     },
     autotag = {
         enable = true,

@@ -2,7 +2,6 @@ require("options")
 require("config.lazy")()
 
 -- require("plugins")
-require("config.theme")
 require("mappings")
 
 -- cmd("colorscheme gruvbox")
