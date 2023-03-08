@@ -1,4 +1,5 @@
-import({ "trouble", "todo-comments" }, function(modules)
-    modules.trouble.setup()
-    modules["todo-comments"].setup()
-end)
+local trouble = require("trouble")
+local todo_comments = require("todo-comments")
+
+trouble.setup()
+todo_comments.setup()

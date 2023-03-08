@@ -14,20 +14,19 @@ local function with_theme(rhs)
     end
 end
 
-vim.g.mapleader = " "
 
 -- Telescope mappings
 local ok, telescope = pcall(require, "telescope")
 if ok then
     local builtin = require("telescope.builtin")
-    map("n", "<leader>fb", with_theme(builtin.buffers))
-    map("n", "<leader>ff", with_theme(builtin.find_files))
+    -- map("n", "<leader>fb", with_theme(builtin.buffers))
+    -- map("n", "<leader>ff", with_theme(builtin.find_files))
     map("n", "<leader>ft", with_theme(builtin.git_files))
     map("n", "<leader>fg", with_theme(builtin.live_grep))
-    map("n", "<leader>fh", with_theme(builtin.help_tags))
+    -- map("n", "<leader>fh", with_theme(builtin.help_tags))
     map("n", "<leader>gw", with_theme(builtin.grep_string))
     map("n", "<leader>gb", with_theme(builtin.git_branches))
-    map("n", "<leader>gc", with_theme(telescope.extensions.conventional_commits.conventional_commits))
+    -- map("n", "<leader>gc", with_theme(telescope.extensions.conventional_commits.conventional_commits))
 end
 
 -- Debugging mappings

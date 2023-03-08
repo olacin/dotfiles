@@ -1,3 +1,3 @@
-import("fidget", function(fidget)
-    fidget.setup({ text = { spinner = "pipe" } })
-end)
+local fidget = require("fidget")
+
+fidget.setup({ text = { spinner = "pipe" } })

@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -27,6 +29,3 @@ vim.opt.showmode = false
 vim.opt.winbar = "%=%m %f"
 vim.opt.mouse = nil
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
--- cmd("colorscheme gruvbox")
-vim.cmd("colorscheme tokyonight")
