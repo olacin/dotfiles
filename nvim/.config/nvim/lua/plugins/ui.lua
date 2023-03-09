@@ -1,16 +1,17 @@
 return {
-    { "stevearc/dressing.nvim",
-      opts = {
-        input = {
-            enabled = true,
-            border = "rounded",
-            relative = "editor",
-            prefer_width = 50,
-            width = nil,
-            max_width = { 140, 0.9 },
-            min_width = { 20, 0.2 },
+    {
+        "stevearc/dressing.nvim",
+        opts = {
+            input = {
+                enabled = true,
+                border = "rounded",
+                relative = "editor",
+                prefer_width = 50,
+                width = nil,
+                max_width = { 140, 0.9 },
+                min_width = { 20, 0.2 },
+            },
         },
-      }
     },
     {
         "nvim-lualine/lualine.nvim",
@@ -45,6 +46,21 @@ return {
                     },
                 },
             },
-        }
+        },
+    },
+    {
+        "folke/trouble.nvim",
+        dependencies = {
+            { "kyazdani42/nvim-web-devicons" },
+        },
+        config = true,
+    },
+    { "folke/todo-comments.nvim", config = true },
+    {
+        "RRethy/vim-illuminate",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+        },
     },
 }

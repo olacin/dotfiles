@@ -23,22 +23,7 @@ return function(opts)
     require("lazy").setup(opts)
 end
 
---     {
---         "folke/trouble.nvim",
---         dependencies = {
---             { "kyazdani42/nvim-web-devicons" },
---             { "folke/todo-comments.nvim" },
---         },
---     },
 --     "folke/lsp-colors.nvim",
---
---     {
---         "tzachar/cmp-tabnine",
---         build = "./install.sh",
---         dependencies = "hrsh7th/nvim-cmp",
---     },
---
---
 --     -- Debugging
 --     {
 --         "mfussenegger/nvim-dap",

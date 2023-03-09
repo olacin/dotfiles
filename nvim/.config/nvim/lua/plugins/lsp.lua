@@ -2,7 +2,7 @@ local disabled_formatters = { "tsserver", "gopls" }
 
 -- Setup mappings on LSP
 local on_attach = function(client, bufnr)
-    local illuminate = require("illuminate")
+    -- local illuminate = require("illuminate")
 
     if vim.tbl_contains(disabled_formatters, client.name) then
         -- Disable formatting
@@ -13,7 +13,7 @@ local on_attach = function(client, bufnr)
     local opts = { buffer = bufnr }
 
     -- Enable illuminate
-    illuminate.on_attach(client)
+    -- illuminate.on_attach(client)
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -47,18 +47,6 @@ return {
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
         },
-        opts = {
-            servers = {
-                gopls = {},
-                pyright = {},
-                lua_ls = {
-                    settings = { Lua = { diagnostics = { globals = { "vim" } } } },
-                },
-                rust_analyzer = {},
-                tsserver = {},
-                tailwindcss = {},
-            },
-        },
         config = function()
             local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
@@ -89,7 +77,6 @@ return {
             },
         },
     },
-    { "RRethy/vim-illuminate" },
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -168,5 +155,10 @@ return {
             })
         end,
     },
-    { "j-hui/fidget.nvim" },
+    {
+        "j-hui/fidget.nvim",
+        opts = {
+            { text = { spinner = "pipe" } },
+        },
+    },
 }
