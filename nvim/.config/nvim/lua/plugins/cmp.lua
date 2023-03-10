@@ -1,6 +1,22 @@
 return {
     { "stevearc/dressing.nvim" },
     {
+        "windwp/nvim-ts-autotag",
+        ft = { "html", "typescript", "typescriptreact", "javascriptreact", "javascript", "tsx", "jsx" },
+    },
+    {
+        "windwp/nvim-autopairs",
+        dependencies = "hrsh7th/nvim-cmp",
+        config = function()
+            require("nvim-autopairs").setup()
+
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            local cmp = require("cmp")
+
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        end,
+    },
+    {
         "tzachar/cmp-tabnine",
         build = "./install.sh",
         dependencies = "hrsh7th/nvim-cmp",
@@ -33,13 +49,13 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                        ["<C-j>"] = cmp.mapping.select_next_item(),
-                        ["<C-k>"] = cmp.mapping.select_prev_item(),
-                        ["<C-e>"] = cmp.mapping.close(),
-                        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                        ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-j>"] = cmp.mapping.select_next_item(),
+                    ["<C-k>"] = cmp.mapping.select_prev_item(),
+                    ["<C-e>"] = cmp.mapping.close(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<C-Space>"] = cmp.mapping.complete(),
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },

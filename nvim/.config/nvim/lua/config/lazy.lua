@@ -23,39 +23,6 @@ return function(opts)
     require("lazy").setup(opts)
 end
 
---     "folke/lsp-colors.nvim",
---     -- Debugging
---     {
---         "mfussenegger/nvim-dap",
---         dependencies = {
---             { "mfussenegger/nvim-dap-python" },
---             { "leoluz/nvim-dap-go" },
---             { "rcarriga/nvim-dap-ui" },
---         },
---     },
---
---     -- Git
---     "tpope/vim-fugitive",
---     "TimUntersberger/neogit",
---     "sindrets/diffview.nvim",
---     {
---         "lewis6991/gitsigns.nvim",
---         dependencies = {
---             "nvim-lua/plenary.nvim",
---         },
---     },
---
---     -- Docstrings
---     {
---         "danymat/neogen",
---         dependencies = "nvim-treesitter/nvim-treesitter",
---     },
---
 --     -- Misc
 --     "tpope/vim-surround",
 --     "ThePrimeagen/harpoon",
---     "numToStr/Comment.nvim",
---     "windwp/nvim-autopairs",
---     "windwp/nvim-ts-autotag",
---     "lukas-reineke/indent-blankline.nvim",
--- }, { defaults = { lazy = true } })
