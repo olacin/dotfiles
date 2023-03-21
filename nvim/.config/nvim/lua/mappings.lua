@@ -6,49 +6,6 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
-local function with_theme(rhs)
-    local themes = require("telescope.themes")
-
-    return function()
-        return rhs(themes.get_dropdown({}))
-    end
-end
-
-vim.g.mapleader = " "
-
--- Telescope mappings
-local ok, telescope = pcall(require, "telescope")
-if ok then
-    local builtin = require("telescope.builtin")
-    map("n", "<leader>fb", with_theme(builtin.buffers))
-    map("n", "<leader>ff", with_theme(builtin.find_files))
-    map("n", "<leader>ft", with_theme(builtin.git_files))
-    map("n", "<leader>fg", with_theme(builtin.live_grep))
-    map("n", "<leader>fh", with_theme(builtin.help_tags))
-    map("n", "<leader>gw", with_theme(builtin.grep_string))
-    map("n", "<leader>gb", with_theme(builtin.git_branches))
-    map("n", "<leader>gc", with_theme(telescope.extensions.conventional_commits.conventional_commits))
-end
-
--- Debugging mappings
-local ok, dap = pcall(require, "dap")
-if ok then
-    local dap_python = require("dap-python")
-    map("n", "<leader>dc", dap.continue)
-    map("n", "<leader>dk", dap.terminate)
-    map("n", "<leader>do", dap.step_over)
-    map("n", "<leader>di", dap.step_into)
-    map("n", "<leader>du", dap.step_out)
-    map("n", "<leader>b", dap.toggle_breakpoint)
-    map("n", "<leader>dt", dap_python.test_method)
-end
-
--- Docstring
-local ok, neogen = pcall(require, "neogen")
-if ok then
-    map("n", "<leader>d", neogen.generate)
-end
-
 -- Luasnip mappings
 local ok, luasnip = pcall(require, "luasnip")
 if ok then

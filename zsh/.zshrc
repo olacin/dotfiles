@@ -83,3 +83,5 @@ for s in "${sources[@]}"; do
 done
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+source /home/npr/.config/broot/launcher/bash/br
