@@ -17,7 +17,7 @@ return function(opts)
         defaults = { lazy = true },
         import = "plugins",
         install = {
-            colorscheme = { "tokyonight" },
+            colorscheme = { "afterglow" },
         },
     }, opts or {})
     require("lazy").setup(opts)

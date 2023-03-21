@@ -1,9 +1,17 @@
 return {
-    { "ellisonleao/gruvbox.nvim" },
     {
-        "folke/tokyonight.nvim",
+        "sainnhe/gruvbox-material",
         lazy = false,
         priority = 1000,
+        config = function()
+            vim.cmd([[colorscheme gruvbox-material]])
+        end,
+    },
+    {
+        "folke/tokyonight.nvim",
+        enabled = false,
+        lazy = false,
+        -- priority = 1000,
         config = function()
             require("tokyonight").setup({
                 style = "moon",
@@ -16,6 +24,6 @@ return {
                 lualine_bold = true,
             })
             vim.cmd([[colorscheme tokyonight]])
-        end
+        end,
     },
 }
