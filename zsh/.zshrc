@@ -47,7 +47,16 @@ bindkey -M vicmd "v" edit-command-line
 # Incremental search in insert mode
 bindkey "^R" history-incremental-search-backward
 
+# fzf theme
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Bat theme
+export BAT_THEME="Catppuccin-mocha"
 
 HYPHEN_INSENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
@@ -58,11 +67,6 @@ export GO111MODULE=on
 # Node
 export PATH="$PATH:${HOME}/.npm-packages/bin"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-
-# React Native
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 
 # Python
 export PYTHONDONTWRITEBYTECODE=1
