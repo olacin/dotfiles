@@ -27,6 +27,7 @@ antigen bundle docker-compose
 antigen bundle git
 antigen bundle zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle marlonrichert/zsh-autocomplete --branch=main
 
 antigen apply
 
@@ -89,4 +90,15 @@ done
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:/home/npr/.temporalio/bin"
 
-source /home/npr/.config/broot/launcher/bash/br
+source "$HOME/.asdf/asdf.sh"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+
+# pnpm
+export PNPM_HOME="/home/npr/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

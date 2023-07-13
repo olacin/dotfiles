@@ -1,5 +1,5 @@
 return {
-    { "stevearc/dressing.nvim" },
+    -- { "stevearc/dressing.nvim" },
     {
         "windwp/nvim-ts-autotag",
         ft = { "html", "typescript", "typescriptreact", "javascriptreact", "javascript", "tsx", "jsx" },
