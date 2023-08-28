@@ -3,33 +3,41 @@ export EDITOR='nvim'
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+export LC_COLLATE=C
 
 export HISTSIZE=100000000
 export SAVEHIST=$HISTSIZE
 export HISTFILE=$HOME/.zsh_history
 
 # Plugins
-ANTIGEN="$HOME/antigen/antigen.zsh"
-if [[ ! -f "$ANTIGEN" ]]; then
-    echo "Downloading antigen..."
-    mkdir -p "$HOME/antigen"
-    touch $ANTIGEN
-    curl -s -L git.io/antigen -o $ANTIGEN
+ZGENOM_HOME="$HOME/.zgenom"
+ZGENOM="$ZGENOM_HOME/zgenom.zsh"
+if [[ ! -f "$ZGENOM" ]]; then
+    echo "Downloading zgenom..."
+    git clone https://github.com/jandamm/zgenom.git "${ZGENOM_HOME}"
 fi
-source $ANTIGEN
+source "${ZGENOM}"
 
-antigen use oh-my-zsh
+zgenom autoupdate
 
-antigen bundle aliases
-antigen bundle command-not-found
-antigen bundle docker
-antigen bundle docker-compose
-antigen bundle git
-antigen bundle zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle marlonrichert/zsh-autocomplete --branch=main
+# if the init script doesn't exist
+if ! zgenom saved; then
 
-antigen apply
+  # specify plugins here
+  zgenom ohmyzsh
+
+  zgenom ohmyzsh plugins/aliases
+  zgenom ohmyzsh plugins/command-not-found
+  zgenom ohmyzsh plugins/docker
+  zgenom ohmyzsh plugins/docker-compose
+  zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/zsh-autosuggestions
+
+  zgenom load zsh-users/zsh-syntax-highlighting
+
+  # generate the init script from plugins above
+  zgenom save
+fi
 
 eval "$(starship init zsh)"
 
@@ -95,10 +103,22 @@ source "$HOME/.asdf/asdf.sh"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
-# pnpm
-export PNPM_HOME="/home/npr/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+
+#compdef temporal
+_cli_zsh_autocomplete() {
+  local -a opts
+  local cur
+  cur=${words[-1]}
+  if [[ "$cur" == "-"* ]]; then
+    opts=("${(@f)$(_CLI_ZSH_AUTOCOMPLETE_HACK=1 ${words[@]:0:#words[@]-1} ${cur} --generate-bash-completion)}")
+  else
+    opts=("${(@f)$(_CLI_ZSH_AUTOCOMPLETE_HACK=1 ${words[@]:0:#words[@]-1} --generate-bash-completion)}")
+  fi
+  if [[ "${opts[1]}" != "" ]]; then
+    _describe 'values' opts
+  else
+    _files
+  fi
+  return
+}
+compdef _cli_zsh_autocomplete temporal
